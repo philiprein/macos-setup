@@ -98,13 +98,13 @@ In this step, we will adjust the settings of some of the standard macOS applicat
 
 Some settings are not easily scriptable, so I made a list of settings to be adjusted manually in [7b_app_settings_manual.md](./8b_app_settings_manual.md).
 
-### Third Party App Settings
+### Step 9: Third Party App Settings
 
 [mackup](https://github.com/lra/mackup) is a great tool for backing up the settings of third-party applications that do not have their own sync option. In this step we will leverage mackup in [9a_third_party_app_settings.sh](./9a_third_party_app_settings.sh) to restore third-party application settings. This script will also manually copy some application settings that mackup doesn't support from a Time Machine backup volume. This backup volume needs to be mounted before running the script.
 
 [9b_firefox_hardening.sh](./9b_firefox_hardening.sh) hardens the Firefox browser using the user.js by [arkenfox](https://github.com/arkenfox/user.js) and also applies my custom [user-overrides.js](./etc/user-overrides.js). Before running the script, open Firefox and log into your Mozilla account.
 
-### Finalizations
+### Step 10: Finalizations
 
 The script [10a_finalizations.sh](./10a_finalizations.sh) copies the contents of the Documents folder from a Time Machine backup volume to the Documents folder in your home directory. It also migrates Internet Accounts.
 
