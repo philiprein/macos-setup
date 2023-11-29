@@ -17,7 +17,7 @@ export HOMEBREW_CASK_OPTS="--no-quarantine"
 # check if homebrew is installed
 if command -v brew &> /dev/null; then
   echo "Installing Homebrew Formulae, Casks and Mac App Store apps..."
-  brew bundle --file="$(cd -- "$(dirname -- "${(%):-%x}")" && cd .. && pwd)/etc/Brewfile" --verbose
+  brew bundle --file="$(dirname "${0:A}")/etc/Brewfile" --verbose
 
   echo "Cleaning up Homebrew..."
   brew cleanup --prune=all &>/dev/null
