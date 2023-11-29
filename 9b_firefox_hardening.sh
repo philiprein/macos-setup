@@ -6,7 +6,7 @@
 osascript -e 'tell application "Firefox" to quit'
 
 # profile path
-FIREFOX_PROFILE_PATH=$(find "${HOME}/Library/Application Support/Firefox" -name "*.default*")
+FIREFOX_PROFILE_PATH=$(find "${HOME}/Library/Application Support/Firefox" -name "*.default-release*")
 
 if [[ ! -e $FIREFOX_PROFILE_PATH ]]; then
   echo "Firefox profile wasn't found. Exiting..."
