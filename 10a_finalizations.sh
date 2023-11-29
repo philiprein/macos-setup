@@ -41,6 +41,20 @@ else
   echo "Backup Documents folder not found."
 fi
 
+# migrate mail rules
+echo "Migrating Mail rules..."
+osascript -e 'tell application "Mail" to quit'
+# check if the rule files exist
+MAIL_DATA_FOLDER=$(cd "$BACKUP_HOME_FOLDER"/Library/Mail/V*/MailData && pwd)
+
+if [[ -e $MAIL_DATA_FOLDER ]]; then
+  cp -f "$MAIL_DATA_FOLDER"/RulesActiveState.plist "$HOME"/Library/Mail/V*/MailData/RulesActiveState.plist
+  cp -f "$MAIL_DATA_FOLDER"/SyncedRules.plist "$HOME"/Library/Mail/V*/MailData/SyncedRules.plist
+  cp -f "$MAIL_DATA_FOLDER"/UnsyncedRules.plist "$HOME"/Library/Mail/V*/MailData/UnsyncedRules.plist
+else
+  echo "Mail data folder could not be found. Skipping..."
+fi
+
 # migrate internet accounts
-echo "Migrating Internet Accounts..."
+echo "Migrating internet accounts..."
 /System/Library/InternetAccounts/internetAccountsMigrator
