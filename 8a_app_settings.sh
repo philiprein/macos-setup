@@ -97,17 +97,6 @@ defaults write com.apple.iCal "Show Week Numbers" -bool true
 
 echo "Contacts settings..."
 
-# without opening contacs first some settings could not be applied (e.g. ABDefaultAddressCountryCode)
-# osascript <<EOF
-#   try
-#     tell application "Contacts"
-#       run
-#       delay 3
-#       quit
-#     end tell
-#   end try		
-# EOF
-
 ### general
 
 # short name format (default: first name only)
@@ -140,14 +129,10 @@ echo "Finder settings..."
 ### general
 
 # show these items on the desktop
-# hard disks (default: off)
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
 # external disks (default: on)
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
 # cds, dvds, and ipods (default: on)
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
-# connected servers (default: off)
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 
 # new finder windows show (default: recents)
 # computer = PfCm
@@ -269,6 +254,20 @@ chflags nohidden ~/Library
 ###
 ### mail
 ###
+
+echo "Mail settings..."
+
+# mail needs to be openend once, otherwise settings won't apply
+echo "Opening and closing Mail..."
+osascript <<EOF
+  try
+    tell application "Mail"
+      run
+      delay 4
+      quit
+    end tell
+  end try		
+EOF
 
 ### general
 
@@ -657,6 +656,18 @@ defaults write com.apple.Terminal ShowLineMarks -int 0
 ###
 
 echo "TextEdit settings..."
+
+# textedit needs to be openend once, otherwise settings won't apply
+echo "Opening and closing TextEdit..."
+osascript <<EOF
+  try
+    tell application "TextEdit"
+      run
+      delay 3
+      quit
+    end tell
+  end try		
+EOF
 
 ### new document
 
