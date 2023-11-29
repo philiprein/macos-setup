@@ -55,7 +55,7 @@ if [[ -d $MAIL_DATA_PATH ]]; then
   for folder in "$MAIL_DATA_PATH"/V*; do
     if [[ -d $folder ]]; then
       # extract the numeric part of the folder name
-      version_number=${folder//[^0-9]/}
+      version_number=$(echo $folder | grep -o 'V[0-9]*$' | tr -d 'V')
 
       # check if this version number is greater than the highest found so far
       if (( version_number > highest_version )); then
