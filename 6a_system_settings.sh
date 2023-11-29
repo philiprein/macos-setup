@@ -68,7 +68,7 @@ defaults write NSGlobalDomain com.apple.sound.beep.sound -string "/System/Librar
 # play sound on startup (default: on)
 # on = %00
 # off = %01
-sudo nvram StartupMute=%00
+sudo nvram StartupMute=%01
 
 # play feedback when volume is changed (default: off)
 # on = 1
@@ -154,13 +154,13 @@ echo "Appearance settings..."
 # appearance (default: set in setup assistant or light) (needs logout)
 # check: defaults read NSGlobalDomain | grep AppleInterfaceStyle
 # light
-# defaults delete NSGlobalDomain AppleInterfaceStyle
+# defaults delete NSGlobalDomain AppleInterfaceStyle 2>/dev/null
 # defaults write NSGlobalDomain AppleInterfaceStyleSwitchesAutomatically -bool false
 # dark
 # defaults write NSGlobalDomain AppleInterfaceStyle -string "Dark"
 # defaults write NSGlobalDomain AppleInterfaceStyleSwitchesAutomatically -bool false
 # automatic
-defaults delete NSGlobalDomain AppleInterfaceStyle
+defaults delete NSGlobalDomain AppleInterfaceStyle 2>/dev/null
 defaults write NSGlobalDomain AppleInterfaceStyleSwitchesAutomatically -bool true
 
 # accent color (default: multicolor)
@@ -215,11 +215,6 @@ echo "Accessibility settings..."
 
 
 ### keyboard
-
-# full keyboard access (default: 0)
-# on = 2
-# off = 0
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 
 
 ### pointer control
@@ -281,10 +276,10 @@ defaults -currentHost write com.apple.Spotlight MenuItemHidden -bool true
 
 # time machine (default: don't show in menu bar) & vpn (default: don't show in menu bar)
 # first delete all entries from the menuExtras array
-defaults delete com.apple.systemuiserver.plist menuExtras
+defaults delete com.apple.systemuiserver.plist menuExtras 2>/dev/null
 # delete visibility status
-defaults delete com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.TimeMachine"
-defaults delete com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.vpn"
+defaults delete com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.TimeMachine" 2>/dev/null
+defaults delete com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.vpn" 2>/dev/null
 # add the entries you wish to see
 defaults write com.apple.systemuiserver.plist menuExtras -array-add "/System/Library/CoreServices/Menu Extras/TimeMachine.menu"
 # defaults write com.apple.systemuiserver.plist menuExtras -array-add "/System/Library/CoreServices/Menu Extras/VPN.menu"
@@ -298,17 +293,19 @@ echo "Siri & Spotlight settings..."
 
 # siri suggestions & privacy (default: all enabled)
 # to disable "show siri suggestions for x", add the app's bundle identifier to the AppCanShowSiriSuggestionsBlacklist array
-defaults delete com.apple.suggestions AppCanShowSiriSuggestionsBlacklist
+defaults delete com.apple.suggestions AppCanShowSiriSuggestionsBlacklist 2>/dev/null
 defaults write com.apple.suggestions AppCanShowSiriSuggestionsBlacklist -array-add \
   "com.apple.AddressBook" \
   "com.apple.FaceTime" \
+  "com.apple.iBooksX" \
   "com.apple.iCal" \
   "com.apple.mail" \
   "com.apple.Maps" \
   "com.apple.MobileSMS" \
   "com.apple.news" \
   "com.apple.podcasts" \
-  "com.apple.reminders"
+  "com.apple.reminders" \
+  "com.apple.Safari"
 
 # to disable "learn from this application", add the app's bundle identifier to the SiriCanLearnFromAppBlacklist array
 defaults delete com.apple.suggestions SiriCanLearnFromAppBlacklist
@@ -318,6 +315,7 @@ defaults write com.apple.suggestions SiriCanLearnFromAppBlacklist -array-add \
   "com.apple.clock" \
   "com.apple.FaceTime" \
   "com.apple.freeform" \
+  "com.apple.helpviewer" \
   "com.apple.iBooksX" \
   "com.apple.iCal" \
   "com.apple.mail" \
@@ -339,7 +337,7 @@ defaults write com.apple.suggestions SiriCanLearnFromAppBlacklist -array-add \
 defaults read com.apple.suggestions.plist &>/dev/null
 
 # search results (default: all enabled)
-defaults delete com.apple.Spotlight orderedItems
+defaults delete com.apple.Spotlight orderedItems 2>/dev/null
 
 /usr/libexec/PlistBuddy -c 'Add :orderedItems array' ~/Library/Preferences/com.apple.Spotlight.plist
 
@@ -447,6 +445,11 @@ defaults write com.apple.dock scroll-to-open -bool true
 
 ### desktop & stage manager
 
+# click wallpaper to reveal desktop (default: always)
+# always = true
+# only in stage manager = false
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
+
 
 ### widgets
 
@@ -512,8 +515,8 @@ defaults write com.apple.dock wvous-bl-corner -int 1
 defaults write com.apple.dock wvous-bl-modifier -int 0
 
 # bottom right screen corner (default: quick note)
-defaults write com.apple.dock wvous-br-corner -int 1
-defaults write com.apple.dock wvous-br-modifier -int 0
+defaults write com.apple.dock wvous-br-corner -int 4
+defaults write com.apple.dock wvous-br-modifier -int 1048576
 
 
 ###
@@ -598,7 +601,7 @@ echo "Users & Groups settings..."
 ###
 
 
-### autofill passwords and passkeys
+### password options
 
 # use passwords and passkeys from
 # keychain (default: on)
@@ -725,6 +728,28 @@ defaults write NSGlobalDomain com.apple.trackpad.scaling -float 0.875
 # natural scrolling (default: on)
 # already done in mouse section
 # defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+
+
+### more gestures
+
+# swipe between pages & swipe between full-screen applications (default: scroll left or right with two fingers & swipe left or right with three fingers)
+# off & off = false, 0, 0, 0, 0, 0, 0
+# off & swipe left or right with three fingers = false, 2, 2, 2, 2, 2, 2
+# off & swipe left or right with four fingers = false, 0, 0, 0, 2, 2, 2
+# scroll left or right with two fingers & off = true, 0, 0, 0, 0, 0, 0
+# scroll left or right with two fingers & swipe left or right with three fingers = true, 2, 2, 2, 2, 2, 2
+# scroll left or right with two fingers & swipe left or right with four fingers = true, 0, 0, 0, 2, 2, 2
+# swipe with three fingers & off = false, 1, 1, 1, 0, 0, 0
+# swipe with three fingers & swipe left or right with four fingers = false, 1, 1, 1, 2, 2, 2
+# swipe with two or three fingers & off = true, 1, 1, 1, 0, 0, 0
+# swipe with two or three fingers & swipe left or right with four fingers = true, 1, 1, 1, 2, 2, 2
+defaults write NSGlobalDomain AppleEnableSwipeNavigateWithScrolls -bool false
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerHorizSwipeGesture -int 1
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerHorizSwipeGesture -int 1
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerHorizSwipeGesture -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadFourFingerHorizSwipeGesture -int 2
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.fourFingerHorizSwipeGesture -int 2
 
 # mission control & app expose (default: swipe up with three fingers & off)
 # off & off = false, false, 1, 1, 1, 2, 2, 2
