@@ -70,7 +70,7 @@ TODO
 
 ### Step 5: Homebrew Formulae, Casks, Mac App Store Apps & VSCode Extensions
 
-[Homebrew](https://brew.sh) is a package manager for macOS that allows you to install and update command line tools and applications. To install Homebrew, use [5a_homebrew.sh](./5a_homebrew.sh). This script checks if Homebrew was already installed. If not, it installs it. On Apple Silicon Macs, it appends the default Homebrew shell environment to `.zprofile` and `.bash_profile` to make sure that the default installation prefix `/opt/homebrew` is in your `$PATH`.
+[Homebrew](https://brew.sh) is a package manager for macOS that allows you to install and update command line tools and applications. To install Homebrew, use [5a_homebrew.sh](./5a_homebrew.sh). Before running the script, it makes sense to give the Terminal application full disk access (System Settings -> Privacy & Security -> Full Disk Access), otherwise it will constantly ask you for permission to access different folders. This script checks if Homebrew was already installed. If not, it installs it. On Apple Silicon Macs, it appends the default Homebrew shell environment to `.zprofile` and `.bash_profile` to make sure that the default installation prefix `/opt/homebrew` is in your `$PATH`.
 
 [`mas`](https://github.com/mas-cli/mas) is a command line interface for the Mac App Store that allows you to install and update applications from the Mac App Store using the command line.
 
@@ -88,7 +88,7 @@ After running the script, restart your Mac for the settings to take effect. Some
 
 ### Step 7: Dock & Default Applications
 
-Now we will customise the Dock and the default applications to open certain file types. A great tool for customising the Dock is [dockutil](https://github.com/kcrawford/dockutil), but as of November 2023, the [Homebrew formula is not up to date](https://github.com/kcrawford/dockutil/issues/146), so there is no easy way to install it. I therefore wrote a custom script ([7a_dock.sh](./7a_dock.sh)) based on [tiiiecherle's script](https://github.com/tiiiecherle/osx_install_config/blob/master/10_dock/10_dock.sh). You can the dock items it inserts by editing the lines at the bottom of the script.
+Now we will customise the Dock and the default applications to open certain file types. A great tool for customising the Dock is [dockutil](https://github.com/kcrawford/dockutil), but as of November 2023, the [Homebrew formula is not up to date](https://github.com/kcrawford/dockutil/issues/146), so there is no easy way to install it. I therefore wrote a custom script ([7a_dock.sh](./7a_dock.sh)) based on [tiiiecherle's script](https://github.com/tiiiecherle/osx_install_config/blob/master/10_dock/10_dock.sh). You can customise the dock items it inserts by editing the lines at the bottom of the script.
 
 To customise the default applications to open certain file types, we use a tool called [duti](https://github.com/moretension/duti). The script [7b_default_apps.sh](./7b_default_apps.sh) shows duti in action.
 
@@ -106,7 +106,7 @@ Some settings are not easily scriptable, so I made a list of settings to be adju
 
 ### Step 10: Finalizations
 
-The script [10a_finalizations.sh](./10a_finalizations.sh) copies the contents of the Documents folder from a Time Machine backup volume to the Documents folder in your home directory. It also migrates Internet Accounts.
+The script [10a_finalizations.sh](./10a_finalizations.sh) copies the contents of the Documents folder from a Time Machine backup volume to the Documents folder in your home directory. It also migrates Mail rules if you have any.
 
 [10b_finalizations_manual.md](./10b_finalizations_manual.md) lists a few manual steps that are left over such as reactivating software licenses.
 
