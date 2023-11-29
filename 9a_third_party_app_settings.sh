@@ -80,7 +80,7 @@ osascript <<EOF
   end try		
 EOF
 
-cp -Rf "${BACKUP_HOME_FOLDER}/Library/Application Support/Alfred/Alfred.alfredpreferences" "${HOME}/Library/Application Support/Alfred/Alfred.alfredpreferences"
+cp -R "${BACKUP_HOME_FOLDER}/Library/Application Support/Alfred/Alfred.alfredpreferences" "${HOME}/Library/Application Support/Alfred/Alfred.alfredpreferences"
 
 ### money money
 
@@ -96,5 +96,5 @@ osascript <<EOF
   end try		
 EOF
 
-cp -f "${BACKUP_HOME_FOLDER}/Library/Containers/com.moneymoney-app.retail/Data/Library/Application Support/MoneyMoney/Database/MoneyMoney.sqlite" "${HOME}/Library/Containers/com.moneymoney-app.retail/Data/Library/Application Support/MoneyMoney/Database/MoneyMoney.sqlite"
-cp -f "${BACKUP_HOME_FOLDER}/Library/Containers/com.moneymoney-app.retail/Data/Library/Application Support/MoneyMoney/Database/MoneyMoney-Backup.sqlite" "${HOME}/Library/Containers/com.moneymoney-app.retail/Data/Library/Application Support/MoneyMoney/Database/MoneyMoney-Backup.sqlite"
+cp "${BACKUP_HOME_FOLDER}/Library/Containers/com.moneymoney-app.retail/Data/Library/Application Support/MoneyMoney/Database/MoneyMoney.sqlite" "${HOME}/Library/Containers/com.moneymoney-app.retail/Data/Library/Application Support/MoneyMoney/Database/MoneyMoney.sqlite"
+cp "${BACKUP_HOME_FOLDER}/Library/Containers/com.moneymoney-app.retail/Data/Library/Application Support/MoneyMoney/Database/MoneyMoney-Backup.sqlite" "${HOME}/Library/Containers/com.moneymoney-app.retail/Data/Library/Application Support/MoneyMoney/Database/MoneyMoney-Backup.sqlite"

@@ -44,17 +44,36 @@ fi
 # migrate mail rules
 echo "Migrating Mail rules..."
 osascript -e 'tell application "Mail" to quit'
-# check if the rule files exist
-MAIL_DATA_FOLDER=$(cd "$BACKUP_HOME_FOLDER"/Library/Mail/V*/MailData && pwd)
 
-if [[ -e $MAIL_DATA_FOLDER ]]; then
-  cp -f "$MAIL_DATA_FOLDER"/RulesActiveState.plist "$HOME"/Library/Mail/V*/MailData/RulesActiveState.plist
-  cp -f "$MAIL_DATA_FOLDER"/SyncedRules.plist "$HOME"/Library/Mail/V*/MailData/SyncedRules.plist
-  cp -f "$MAIL_DATA_FOLDER"/UnsyncedRules.plist "$HOME"/Library/Mail/V*/MailData/UnsyncedRules.plist
+# determine mail data version
+MAIL_DATA_PATH="$BACKUP_HOME_FOLDER"/Library/Mail
+
+if [[ -d $MAIL_DATA_PATH ]]; then
+  highest_version=0
+  highest_version_folder=""
+
+  for folder in "$MAIL_DATA_PATH"/V*; do
+    if [[ -d $folder ]]; then
+      # extract the numeric part of the folder name
+      version_number=${folder//[^0-9]/}
+
+      # check if this version number is greater than the highest found so far
+      if (( version_number > highest_version )); then
+        highest_version=$version_number
+        highest_version_folder=$folder
+      fi
+    fi
+  done
+  # check if the rule files exist
+  MAIL_DATA_FOLDER=$(cd "$BACKUP_HOME_FOLDER"/Library/Mail/V$highest_version/MailData && pwd)
+
+  if [[ -e $MAIL_DATA_FOLDER ]] && [[ -e ""$HOME"/Library/Mail/V$highest_version/MailData" ]]; then
+    cp "$MAIL_DATA_FOLDER"/RulesActiveState.plist "$HOME"/Library/Mail/V$highest_version/MailData/RulesActiveState.plist
+    cp "$MAIL_DATA_FOLDER"/SyncedRules.plist "$HOME"/Library/Mail/V$highest_version/MailData/SyncedRules.plist
+    cp "$MAIL_DATA_FOLDER"/UnsyncedRules.plist "$HOME"/Library/Mail/V$highest_version/MailData/UnsyncedRules.plist
+  else
+    echo "Mail data folder could not be found on target. Skipping..."
+  fi
 else
-  echo "Mail data folder could not be found. Skipping..."
+  echo "Mail data path could not be found in backup. Skipping..."
 fi
-
-# migrate internet accounts
-echo "Migrating internet accounts..."
-/System/Library/InternetAccounts/internetAccountsMigrator
