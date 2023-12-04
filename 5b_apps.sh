@@ -1,9 +1,8 @@
 #!/bin/zsh
 
-
 # prompt for sudo password at the beginning of the script
 if sudo -v; then
-  while true; do 
+  while true; do
     # keep-alive for sudo
     sudo -n true
     sleep 60
@@ -15,7 +14,7 @@ fi
 export HOMEBREW_CASK_OPTS="--no-quarantine"
 
 # check if homebrew is installed
-if command -v brew &> /dev/null; then
+if command -v brew &>/dev/null; then
   echo "Installing Homebrew Formulae, Casks and Mac App Store apps..."
   brew bundle --file="$(dirname "${0:A}")/etc/Brewfile" --verbose
 
