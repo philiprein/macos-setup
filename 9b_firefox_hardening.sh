@@ -30,7 +30,7 @@ if [[ ! -e "${FIREFOX_PROFILE_PATH}/prefsCleaner.sh" ]]; then
   echo "Downloading prefsCleaner.sh..."
   curl --silent https://raw.githubusercontent.com/arkenfox/user.js/master/prefsCleaner.sh >"$FIREFOX_PROFILE_PATH"/prefsCleaner.sh
   chown "$USER":staff "$FIREFOX_PROFILE_PATH"/prefsCleaner.sh
-  chmod 644 "$FIREFOX_PROFILE_PATH"/prefsCleaner.sh
+  chmod 755 "$FIREFOX_PROFILE_PATH"/prefsCleaner.sh
 else
   :
 fi
@@ -38,9 +38,9 @@ fi
 # download updater.sh
 if [[ ! -e "${FIREFOX_PROFILE_PATH}/updater.sh" ]]; then
   echo "Downloading updater.sh..."
-  curl --silent https://github.com/arkenfox/user.js/blob/master/updater.sh >"$FIREFOX_PROFILE_PATH"/updater.sh
+  curl --silent https://raw.githubusercontent.com/arkenfox/user.js/master/updater.sh >"$FIREFOX_PROFILE_PATH"/updater.sh
   chown "$USER":staff "$FIREFOX_PROFILE_PATH"/updater.sh
-  chmod 644 "$FIREFOX_PROFILE_PATH"/updater.sh
+  chmod 755 "$FIREFOX_PROFILE_PATH"/updater.sh
 else
   :
 fi
@@ -53,5 +53,7 @@ else
   :
 fi
 
+echo "Running updater.sh..."
 "$FIREFOX_PROFILE_PATH"/updater.sh
+echo "Running prefsCleaner.sh..."
 "$FIREFOX_PROFILE_PATH"/prefsCleaner.sh
