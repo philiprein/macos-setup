@@ -58,7 +58,7 @@ if [[ -d $MAIL_DATA_PATH ]]; then
       version_number=$(echo $folder | grep -o 'V[0-9]*$' | tr -d 'V')
 
       # check if this version number is greater than the highest found so far
-      if (( version_number > highest_version )); then
+      if ((version_number > highest_version)); then
         highest_version=$version_number
         highest_version_folder=$folder
       fi
@@ -77,3 +77,34 @@ if [[ -d $MAIL_DATA_PATH ]]; then
 else
   echo "Mail data path could not be found in backup. Skipping..."
 fi
+
+# migrate alfred 5 settings
+echo "Migrating Alfred 5 settings..."
+
+osascript <<EOF
+  try
+    tell application "Alfred 5"
+      run
+      delay 3
+      quit
+    end tell
+  end try		
+EOF
+
+cp -R "${BACKUP_HOME_FOLDER}/Library/Application Support/Alfred/Alfred.alfredpreferences" "${HOME}/Library/Application Support/Alfred/Alfred.alfredpreferences"
+
+# migrate money money database
+echo "Migrating Money Money database..."
+
+osascript <<EOF
+  try
+    tell application "MoneyMoney"
+      run
+      delay 3
+      quit
+    end tell
+  end try		
+EOF
+
+cp "${BACKUP_HOME_FOLDER}/Library/Containers/com.moneymoney-app.retail/Data/Library/Application Support/MoneyMoney/Database/MoneyMoney.sqlite" "${HOME}/Library/Containers/com.moneymoney-app.retail/Data/Library/Application Support/MoneyMoney/Database/MoneyMoney.sqlite"
+cp "${BACKUP_HOME_FOLDER}/Library/Containers/com.moneymoney-app.retail/Data/Library/Application Support/MoneyMoney/Database/MoneyMoney-Backup.sqlite" "${HOME}/Library/Containers/com.moneymoney-app.retail/Data/Library/Application Support/MoneyMoney/Database/MoneyMoney-Backup.sqlite"
