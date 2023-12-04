@@ -43,7 +43,7 @@ softwareupdate --list
 softwareupdate -i -a --verbose
 ```
 
-Now begins the more advanced, opinionated setup. If you just want a fresh installation of macOS that you can customize manually, you can skip the following steps.
+Now begins the more advanced, opinionated setup. If you just want a fresh installation of macOS that you can customise manually, you can skip the following steps. Before proceeding with the next steps, it is a good idea to give the Terminal application full disk access (System Settings -> Privacy & Security -> Full Disk Access) and allow it to control your computer (System Settings -> Privacy & Security -> Accessibility), otherwise it will keep asking you for permission. If you choose not to do this, be aware that some customisations, especially in step 6, will not work.
 
 ### Step 3: Install Command Line Tools & Rosetta
 
@@ -70,19 +70,15 @@ TODO
 
 ### Step 5: Homebrew Formulae, Casks, Mac App Store Apps & VSCode Extensions
 
-[Homebrew](https://brew.sh) is a package manager for macOS that allows you to install and update command line tools and applications. To install Homebrew, use [5a_homebrew.sh](./5a_homebrew.sh). Before running the script, it makes sense to give the Terminal application full disk access (System Settings -> Privacy & Security -> Full Disk Access), otherwise it will constantly ask you for permission to access different folders. This script checks if Homebrew was already installed. If not, it installs it. On Apple Silicon Macs, it appends the default Homebrew shell environment to `.zprofile` and `.bash_profile` to make sure that the default installation prefix `/opt/homebrew` is in your `$PATH`.
+[Homebrew](https://brew.sh) is a package manager for macOS that allows you to install and update command line tools and applications. To install Homebrew, use [5a_homebrew.sh](./5a_homebrew.sh). This script checks if Homebrew was already installed. If not, it installs it. On Apple Silicon Macs, it appends the default Homebrew shell environment to `.zprofile` and `.bash_profile` to make sure that the default installation prefix `/opt/homebrew` is in your `$PATH`. To be able to run the next script in your current shell environment, run `eval "$(/opt/homebrew/bin/brew shellenv)"` after Homebrew has been successfully installed.
 
-[`mas`](https://github.com/mas-cli/mas) is a command line interface for the Mac App Store that allows you to install and update applications from the Mac App Store using the command line.
-
-[5b_apps.sh](./5b_apps.sh) will install the Homebrew formulae, casks, Mac App Store apps, and VSCode extensions specified in the [Brewfile](./etc/Brewfile) using `brew bundle install`. Be sure to customize the brewfile to your liking.
+[5b_apps.sh](./5b_apps.sh) will install the Homebrew formulae, casks, Mac App Store applications, and VSCode extensions specified in the [Brewfile](./etc/Brewfile) using `brew bundle install`. Be sure to customize the brewfile to your liking. To install Mac App Store applications, the `mas` formula is required. [`mas`](https://github.com/mas-cli/mas) is a command line interface for the Mac App Store that allows you to install and update applications from the Mac App Store using the command line. `mas` can only install applications you previously installed using your Apple ID.
 
 ### Step 6: MacOS System Settings
 
-In this step, we will adapt the macOS system settings to our liking. We will do this using the script [6a_system_settings.sh](./6a_system_settings.sh) which changes some of the system settings using the `defaults` command.
+In this step, we will adapt the macOS system settings to our liking. We will do this using the script [6a_system_settings.sh](./6a_system_settings.sh) which changes some of the system settings using the `defaults` command. Before running the script, make sure you give the Terminal application full disk access (System Settings -> Privacy & Security -> Full Disk Access) and allow it to control your computer (System Settings -> Privacy & Security -> Accessability), otherwise some of the customisations will not work.
 
-The script is structured according to the macOS system settings. As it reflects my personal preferences, I recommend that you adapt it to your own before running it. For reasons of maintainability, this script only changes the settings where my personal preference differs from the default state. If you are missing settings you would like to change, have a look at my [macos-settings](https://github.com/philiprein/macos-settings) repository.
-
-Before running the script, make sure you give the Terminal application full disk access (System Settings -> Privacy & Security -> Full Disk Access) and allow it to control your computer (System Settings -> Privacy & Security -> Accessability), otherwise some of the customisations will not work.
+The script is structured according to the macOS system settings. As it reflects my personal preferences, I recommend that you adapt it to your own before running it. For reasons of maintainability, this script only changes the settings where my personal preference differs from the default state. If you miss any settings you would like to change, have a look at my [macos-settings](https://github.com/philiprein/macos-settings) repository.
 
 After running the script, restart your Mac for the settings to take effect. Some settings are not easily scriptable without disabling System Integrity Protection (SIP), so I made a list of settings to be adjusted manually in [6b_system_settings_manual.md](./6b_system_settings_manual.md).
 
@@ -100,13 +96,13 @@ Some settings are not easily scriptable, so I made a list of settings to be adju
 
 ### Step 9: Third Party App Settings
 
-[mackup](https://github.com/lra/mackup) is a great tool for backing up the settings of third-party applications that do not have their own sync option. In this step we will leverage mackup in [9a_third_party_app_settings.sh](./9a_third_party_app_settings.sh) to restore third-party application settings. This script will also manually copy some application settings that mackup doesn't support from a Time Machine backup volume. This backup volume needs to be mounted before running the script.
+[mackup](https://github.com/lra/mackup) is a great tool for backing up the settings of third-party applications that do not have their own sync option. In this step we will leverage mackup in [9a_third_party_app_settings.sh](./9a_third_party_app_settings.sh) to restore third-party application settings.
 
 [9b_firefox_hardening.sh](./9b_firefox_hardening.sh) hardens the Firefox browser using the user.js by [arkenfox](https://github.com/arkenfox/user.js) and also applies my custom [user-overrides.js](./etc/user-overrides.js). Before running the script, open Firefox and log into your Mozilla account.
 
-### Step 10: Finalizations
+### Step 10: Data Migration
 
-The script [10a_finalizations.sh](./10a_finalizations.sh) copies the contents of the Documents folder from a Time Machine backup volume to the Documents folder in your home directory. It also migrates Mail rules if you have any.
+The [10a_data_migration.sh](./10a_data_migration.sh) script copies some files from a Time Machine backup volume to your computer, such as the contents of the Documents folder or Mail rules. Customise the name of the backup volume and the backup user, and mount the backup volume before running the script.
 
 [10b_finalizations_manual.md](./10b_finalizations_manual.md) lists a few manual steps that are left over such as reactivating software licenses.
 
