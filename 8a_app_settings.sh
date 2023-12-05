@@ -383,27 +383,6 @@ defaults write com.apple.mail WebAutomaticSpellingCorrectionEnabled -bool false
 
 
 ###
-### preview
-###
-
-echo "Preview settings..."
-
-### general
-
-
-### images
-
-# when opening files (default: open groups of files in the same window)
-# open all files in one window = 0
-# open groups of files in the same window = 1
-# open each file in its own window = 2
-defaults write com.apple.Preview PVImageOpeningMode -int 0
-
-
-### pdf
-
-
-###
 ### safari
 ###
 
@@ -708,7 +687,7 @@ defaults write com.apple.TextEdit IgnoreHTML -bool true
 # restart affected applications
 echo "Finished customising app settings. Restarting affected applications..."
 
-for app in "Activity Monitor" "App Store" "Calendar" "Contacts" "Disk Utility" "Finder" "Mail" "Preview" "Safari" "TextEdit"; 
+for app in "Activity Monitor" "App Store" "Calendar" "Contacts" "Disk Utility" "Finder" "Mail" "Safari" "TextEdit"; 
 do
   echo -e " \t $app"
   killall -q "${app}"
