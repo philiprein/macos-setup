@@ -38,7 +38,7 @@ To start reconfiguring macOS, complete the Setup Assistant. For a true clean ins
 
 Once the Setup Assistant has finished, open Terminal to update macOS to the latest version:
 
-```zsh
+```sh
 softwareupdate --list
 softwareupdate -i -a --verbose
 ```
@@ -66,7 +66,11 @@ If you are not sure whether you need Rosetta, you can skip the installation. If 
 
 ### Step 4: Dotfiles
 
-TODO
+After the initial configuration, I like to install my [dotfiles](https://github.com/philiprein/dotfiles). If you don't know what dotfiles are, you can either skip this step or, if you're curious, have a look at the [unofficial guide to dotfiles](https://dotfiles.github.io). My custom dotfiles can be installed using:
+
+```sh
+zsh -c "`curl -fsSL https://raw.githubusercontent.com/philiprein/dotfiles/main/setup.sh`"
+```
 
 ### Step 5: Homebrew Formulae, Casks, Mac App Store Apps & VSCode Extensions
 
