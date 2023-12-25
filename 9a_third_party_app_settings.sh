@@ -30,6 +30,9 @@ install_mackup() {
 }
 
 if install_mackup; then
+  # copy mackup config to home directory
+  cp "$(dirname "${0:A}")/etc/.mackup.cfg" "${HOME}/.mackup.cfg"
+
   # run mackup restore
   mackup restore
 

@@ -1,8 +1,8 @@
 #!/bin/zsh
 
 # variables for backup drive and user
-BACKUP_DRIVE="THE_BACKUP"
-BACKUP_USER="philipreinhart"
+read "BACKUP_DRIVE?Please enter the name of your backup volume: "
+read "BACKUP_USER?Please enter your old username: "
 
 # check if the backup volume is mounted
 if [[ -e "/Volumes/${BACKUP_DRIVE}" ]]; then
@@ -91,7 +91,7 @@ osascript <<EOF
   end try		
 EOF
 
-cp -R "${BACKUP_HOME_FOLDER}/Library/Application Support/Alfred/Alfred.alfredpreferences" "${HOME}/Library/Application Support/Alfred/Alfred.alfredpreferences"
+cp -R "${BACKUP_HOME_FOLDER}/Library/Application Support/Alfred/Alfred.alfredpreferences" "${HOME}/Library/Application Support/Alfred/"
 
 # migrate money money database
 echo "Migrating Money Money database..."
