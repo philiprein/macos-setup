@@ -21,16 +21,19 @@ if ! command -v brew &>/dev/null; then
     echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' | tee -a $HOME/.zprofile >>$HOME/.bash_profile
     # scripts are run in subshells, so this has no effect on the shell environment in which the script is run
     #eval "$(/opt/homebrew/bin/brew shellenv)"
+    # export homebrew path
+    export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}"
   else
     :
   fi
 
-  # turn off analytics
-  brew analytics off
 else
   # installed
   echo "Homebrew is already installed. Skipping install..."
 fi
+
+# turn off analytics
+brew analytics off
 
 # update homebrew
 echo "Updating Homebrew..."
@@ -44,8 +47,3 @@ brew cleanup --prune=all 1>/dev/null
 brew doctor
 
 echo "Finished installing and updating Homebrew."
-if [[ $(uname -m | grep arm) != "" ]]; then
-  echo "Run 'eval "$(/opt/homebrew/bin/brew shellenv)"' to set the shell environment."
-else
-  :
-fi
