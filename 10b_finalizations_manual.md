@@ -1,5 +1,8 @@
 # Finalizations - Manual Adjustments
 
+## Data
+- Copy Data in ~/Movies, ~/Photos and ~/Music
+
 ## Apps
 - Calender
   - check and test sync
