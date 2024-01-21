@@ -18,6 +18,7 @@ cask "appcleaner"
 cask "firefox"
 cask "little-snitch"
 cask "marked"
+cask "raindropio"
 cask "signal"
 cask "spotify"
 cask "thingsmacsandboxhelper"
@@ -32,6 +33,7 @@ mas "Gestimer", id: 990588172
 mas "Magnet", id: 441258766
 mas "MindNode", id: 1289197285
 mas "MoneyMoney", id: 872698314
+mas "Save to Raindrop.io", id: 1549370672
 mas "Things", id: 904280696
 mas "WhatsApp", id: 1147396723
 
