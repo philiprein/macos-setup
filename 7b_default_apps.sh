@@ -47,6 +47,7 @@ if install_duti; then
   duti -s com.microsoft.VSCode .js all
   duti -s com.microsoft.VSCode .json all
   duti -s com.microsoft.VSCode Brewfile all
+  duti -s net.cecinestpasparis.yomu .epub all
 
   echo "Done."
 else

@@ -37,6 +37,7 @@ mas "MoneyMoney", id: 872698314
 mas "Save to Raindrop.io", id: 1549370672
 mas "Things", id: 904280696
 mas "WhatsApp", id: 1147396723
+mas "Yomu", id: 562211012
 
 ## VSCode Extensions
 # vscode ...
