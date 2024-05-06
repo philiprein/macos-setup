@@ -20,7 +20,6 @@ cask "little-snitch"
 cask "marked"
 cask "microsoft-excel"
 cask "microsoft-word"
-cask "raindropio"
 cask "signal"
 cask "spotify"
 cask "tor-browser"
@@ -34,7 +33,6 @@ mas "Gestimer", id: 990588172
 mas "Magnet", id: 441258766
 mas "MindNode", id: 1289197285
 mas "MoneyMoney", id: 872698314
-mas "Save to Raindrop.io", id: 1549370672
 mas "Things", id: 904280696
 mas "WhatsApp", id: 1147396723
 mas "Yomu", id: 562211012

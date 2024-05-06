@@ -111,7 +111,6 @@ defaults write com.apple.dock 'persistent-others' -array '' # right side
 add_system_app persistent-apps Mail.app
 add_system_app persistent-apps Calendar.app
 add_app persistent-apps Things3.app
-add_app persistent-apps Raindrop.io.app
 add_app persistent-apps Bear.app
 add_app persistent-apps 1Password.app
 add_preboot_app persistent-apps Safari.app
