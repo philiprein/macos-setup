@@ -15,11 +15,13 @@ cask "1password"
 cask "aldente"
 cask "alfred"
 cask "appcleaner"
+cask "coconutbattery"
 cask "firefox"
 cask "little-snitch"
 cask "marked"
 cask "microsoft-excel"
 cask "microsoft-word"
+cask "obsidian"
 cask "signal"
 cask "spotify"
 cask "tor-browser"
@@ -27,7 +29,6 @@ cask "visual-studio-code"
 
 ## Mac App Store
 mas "1Password for Safari", id: 1569813296
-mas "Bear", id: 1091189122
 mas "CotEditor", id: 1024640650
 mas "Gestimer", id: 990588172
 mas "Magnet", id: 441258766
