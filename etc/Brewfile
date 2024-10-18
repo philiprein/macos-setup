@@ -40,4 +40,9 @@ mas "WhatsApp", id: 310633997
 mas "Yomu", id: 562211012
 
 ## VSCode Extensions
-# vscode ...
+vscode "esbenp.prettier-vscode"
+vscode "github.github-vscode-theme"
+vscode "ms-python.black-formatter"
+vscode "ms-python.debugpy"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
