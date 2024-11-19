@@ -39,6 +39,7 @@ if install_duti; then
   duti -s com.coteditor.CotEditor .md all
   duti -s com.coteditor.CotEditor .py all
   duti -s com.coteditor.CotEditor .sh all
+  duti -s com.coteditor.CotEditor .xml all
   duti -s com.coteditor.CotEditor .zshenv
   duti -s com.coteditor.CotEditor .zprofile all
   duti -s com.coteditor.CotEditor .zsh all
